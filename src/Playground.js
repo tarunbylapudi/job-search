@@ -5,4 +5,3 @@ export const EvenOdd = (num) => {
   }
   return "Odd";
 };
-//skjdhkshfkhkshdfhl
