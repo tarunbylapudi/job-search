@@ -39,10 +39,10 @@ export default {
 
 <style scoped>
 button {
-  @apply px-5 py-3 font-medium  border-0 rounded;
+  @apply px-5 py-3 font-medium  border-0;
 }
 .primary {
-  @apply text-white bg-brand-blue-1 hover:shadow-blue;
+  @apply text-white bg-brand-blue-1 hover:shadow-blue rounded;
 }
 .secondary {
   @apply bg-transparent text-brand-blue-1 hover:bg-brand-blue-2 hover:text-white;

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="mb-16">
     <h1
       class="font-bold tracking-tighter text-8xl mb-14"
       data-test="action-phrase"
@@ -43,7 +43,7 @@ export default {
       this.interval = setInterval(() => {
         const actions = ["Build", "Create", "Design", "Code"];
         this.action = nextElementInList(actions, this.action);
-      }, 3000);
+      }, 4000);
     },
   },
 };

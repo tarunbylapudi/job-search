@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import Subnav from "@/components/Subnav.vue";
+import Subnav from "@/components/navigation/Subnav.vue";
 
 describe("Subnav", () => {
   describe("when the user is on Job page", () => {
