@@ -1,21 +1,22 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, RouterLinkStub } from "@vue/test-utils";
 import MainNav from "@/components/navigation/MainNav.vue";
 
 describe("MainNav", () => {
+  const createConfig = () => ({
+    global: {
+      stubs: {
+        "router-link": RouterLinkStub,
+      },
+    },
+  });
+
   it("displays company name", () => {
-    const wrapper = shallowMount(
-      MainNav
-      //1
-    );
-    //Set data method ----> async before anonimus function in IT fun
-    // await wrapper.setData({
-    //   company: "zinx",
-    // });
-    expect(wrapper.text()).toMatch("BoBo Careers");
+    const wrapper = shallowMount(MainNav, createConfig());
+    expect(wrapper.text()).toMatch("VitaVings");
   });
 
   it("displays munu items for navbar", () => {
-    const wrapper = shallowMount(MainNav);
+    const wrapper = shallowMount(MainNav, createConfig());
     const menuItems = wrapper.findAll("[data-test='main-nav-list-item']");
     const menuItemTexts = menuItems.map((item) => item.text());
     expect(menuItemTexts).toEqual([
@@ -29,7 +30,7 @@ describe("MainNav", () => {
   });
   describe("when the user logged out", () => {
     it("promps user to sign in", () => {
-      const wrapper = shallowMount(MainNav);
+      const wrapper = shallowMount(MainNav, createConfig());
       const loginButton = wrapper.find("[data-test='login-button']");
 
       expect(loginButton.exists()).toBe(true);
@@ -38,7 +39,7 @@ describe("MainNav", () => {
 
   describe("when the user logged in", () => {
     it("user will see profile pic", async () => {
-      const wrapper = shallowMount(MainNav);
+      const wrapper = shallowMount(MainNav, createConfig());
       let profileImage = wrapper.find("[data-test='profile-image']");
       expect(profileImage.exists()).toBe(false);
 
@@ -50,7 +51,7 @@ describe("MainNav", () => {
     });
 
     it("dispals subnav with additional info", async () => {
-      const wrapper = shallowMount(MainNav);
+      const wrapper = shallowMount(MainNav, createConfig());
       let subnav = wrapper.find("[data-test='subnav']");
       expect(subnav.exists()).toBe(false);
 
@@ -62,13 +63,3 @@ describe("MainNav", () => {
     });
   });
 });
-
-//1
-//Second arg in shallowMount method to chame the view configuration object
-//   , {
-//   data() {
-//     return {
-//       company: "BoB Careers",
-//     };
-//   },
-// }

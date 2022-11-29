@@ -6,7 +6,7 @@
     >
       <span :class="actionClasses">{{ action }}</span> <br />for everyone
     </h1>
-    <h2 class="font-light text-3xl">Find your next job at BoBo Inc.</h2>
+    <h2 class="font-light text-3xl">Find your next job at VitaVings Inc.</h2>
   </section>
 </template>
 
