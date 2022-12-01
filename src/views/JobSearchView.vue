@@ -11,7 +11,7 @@ export default {
   computed: {
     zinx() {
       this.$route;
-      console.log(this.$router);
+
       return "zinx";
     },
   },

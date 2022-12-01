@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669697790069" clover="3.2.0">
-  <project timestamp="1669697790070" name="All files">
-    <metrics statements="91" coveredstatements="91" conditionals="12" coveredconditionals="12" methods="15" coveredmethods="15" elements="118" coveredelements="118" complexity="0" loc="91" ncloc="91" packages="5" files="8" classes="8"/>
+<coverage generated="1669912522411" clover="3.2.0">
+  <project timestamp="1669912522411" name="All files">
+    <metrics statements="92" coveredstatements="92" conditionals="12" coveredconditionals="12" methods="17" coveredmethods="17" elements="121" coveredelements="121" complexity="0" loc="92" ncloc="92" packages="5" files="8" classes="8"/>
     <package name="src">
       <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="Playground.js" path="C:\Users\tarun\git\job-search\src\Playground.js">
@@ -32,29 +32,30 @@
       </file>
     </package>
     <package name="src.components.navigation">
-      <metrics statements="46" coveredstatements="46" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
+      <metrics statements="47" coveredstatements="47" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="8"/>
       <file name="MainNav.vue" path="C:\Users\tarun\git\job-search\src\components\navigation\MainNav.vue">
-        <metrics statements="20" coveredstatements="20" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <metrics statements="21" coveredstatements="21" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
-        <line num="75" count="1" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="79" count="1" type="stmt"/>
-        <line num="82" count="1" type="stmt"/>
-        <line num="86" count="1" type="stmt"/>
-        <line num="90" count="7" type="stmt"/>
-        <line num="91" count="7" type="stmt"/>
-        <line num="92" count="7" type="stmt"/>
-        <line num="93" count="7" type="stmt"/>
-        <line num="99" count="42" type="stmt"/>
-        <line num="117" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="101" count="7" type="stmt"/>
+        <line num="102" count="7" type="stmt"/>
+        <line num="103" count="7" type="stmt"/>
+        <line num="104" count="7" type="stmt"/>
+        <line num="105" count="7" type="stmt"/>
+        <line num="113" count="5" type="stmt"/>
+        <line num="116" count="42" type="stmt"/>
+        <line num="124" count="42" type="stmt"/>
+        <line num="141" count="1" type="stmt"/>
       </file>
       <file name="ProfileImage.vue" path="C:\Users\tarun\git\job-search\src\components\navigation\ProfileImage.vue">
         <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
@@ -75,7 +76,7 @@
         <line num="4" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
         <line num="20" count="2" type="stmt"/>
         <line num="23" count="2" type="stmt"/>

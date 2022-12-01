@@ -2,13 +2,18 @@
   <form
     action=""
     class="flex items-center w-full h-12 mt-14 border border-solid border-brand-gray-3 rounded-3xl"
+    @submit.prevent="searchForJobs"
   >
     <font-awesome-icon :icon="['fas', 'search']" class="ml-4 mr-3" />
     <div class="flex flex-nowrap flex-1 h-full text-base text-light">
       <div class="relative flex items-center flex-1 h-full pr-3">
-        <label for="role" class="absolute left-0 -top-8">Role</label>
+        <label for="role" class="absolute left-0 -top-8">Role </label>
 
-        <text-input v-model="role" placeholder="Full Stack Developer" />
+        <text-input
+          v-model="role"
+          placeholder="Full Stack Developer"
+          data-test="role-input"
+        />
       </div>
       <span
         class="flex items-center h-full px-3 border-l border-r border-brand-gray-3 bg-brand-gray-2"
@@ -17,10 +22,19 @@
       <div class="relative flex items-center flex-1 h-full ml-3">
         <label for="location" class="absolute left-0 -top-8">Location</label>
 
-        <text-input v-model="location" placeholder="Visakhapatnam" />
+        <text-input
+          v-model="location"
+          placeholder="Visakhapatnam"
+          data-test="location-input"
+        />
       </div>
     </div>
-    <action-button text="Search" type="secondary" class="rounded-r-3xl" />
+    <action-button
+      text="Search"
+      type="secondary"
+      class="rounded-r-3xl"
+      data-test="form-submit-button"
+    />
   </form>
 </template>
 
@@ -39,6 +53,14 @@ export default {
       role: "",
       location: "",
     };
+  },
+  methods: {
+    searchForJobs() {
+      this.$router.push({
+        name: "JobResults",
+        query: { role: this.role, location: this.location },
+      });
+    },
   },
 };
 </script>
