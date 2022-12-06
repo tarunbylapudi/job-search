@@ -1,15 +1,27 @@
 <template>
   <li class="mb-7">
-    <router-link to="/jobs/results/1" class="job-container">
+    <router-link :to="jobPageLink" class="job-container">
       <div class="job-head-container">
         <h2 class="job-heading">
-          Technical Account Manager, Pixel Carrier Engineering
+          {{ job.title }}
         </h2>
         <div class="job-address-container">
+          <font-awesome-icon :icon="['fas', 'building']" class="my-auto mr-2" />
           <div class="mr-5">
-            <span>VitaVings</span>
+            <span>{{ job.organization }}</span>
           </div>
-          <div><span>Visakhapatnam, Andhra pradesh</span></div>
+          <div>
+            <ul>
+              <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
+              <li
+                v-for="location in job.locations"
+                :key="location"
+                class="inline-block mr-3"
+              >
+                {{ location }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <hr />
@@ -18,23 +30,17 @@
           <h3 class="mt-1 mb-2">Qualifications:</h3>
           <div>
             <ul class="qualifications">
-              <li>
-                Bachelor's degree in computer science, electrical engineering, a
-                related technical field, or equivalent practical experience.
-              </li>
-              <li>
-                3 years of experience working with cellular carriers, telecom
-                carriers, or device makers.
-              </li>
-              <li>
-                3 years of experience with protocol features of 2G, 3G, 4G, and
-                WLAN technologies.
+              <li
+                v-for="qualification in job.minimumQualifications"
+                :key="qualification"
+              >
+                {{ qualification }}
               </li>
             </ul>
           </div>
         </div>
         <div class="mt-2 text-center">
-          <router-link to="/jobs/results/1" class="text-brand-blue-1"
+          <router-link :to="jobPageLink" class="text-brand-blue-1"
             >Expand</router-link
           >
         </div>
@@ -42,9 +48,24 @@
     </router-link>
   </li>
 </template>
+
 <script>
-export default { name: "JobListing" };
+export default {
+  name: "JobListing",
+  props: {
+    job: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    jobPageLink() {
+      return `/jobs/results/${this.job.id}`;
+    },
+  },
+};
 </script>
+
 <style scoped>
 .job-container {
   display: block;

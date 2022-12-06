@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/jobSearch/Headline.vue</title>
+    <title>Code coverage report for src/components/jobSearch/JobSearchForm.vue</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/jobSearch</a> Headline.vue</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/jobSearch</a> JobSearchForm.vue</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
@@ -128,7 +128,8 @@
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -136,11 +137,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,71 +190,77 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;section class="mb-16"&gt;
-    &lt;h1
-      class="font-bold tracking-tighter text-8xl mb-14"
-      data-test="action-phrase"
-    &gt;
-      &lt;span :class="actionClasses"&gt;{{ action }}&lt;/span&gt; &lt;br /&gt;for everyone
-    &lt;/h1&gt;
-    &lt;h2 class="font-light text-3xl"&gt;Find your next job at VitaVings Inc.&lt;/h2&gt;
-  &lt;/section&gt;
+  &lt;form
+    action=""
+    class="flex items-center w-full h-12 mt-14 border border-solid border-brand-gray-3 rounded-3xl"
+    @submit.prevent="searchForJobs"
+  &gt;
+    &lt;font-awesome-icon :icon="['fas', 'search']" class="ml-4 mr-3" /&gt;
+    &lt;div class="flex flex-nowrap flex-1 h-full text-base text-light"&gt;
+      &lt;div class="relative flex items-center flex-1 h-full pr-3"&gt;
+        &lt;label for="role" class="absolute left-0 -top-8"&gt;Role &lt;/label&gt;
+&nbsp;
+        &lt;text-input
+          v-model="role"
+          placeholder="Full Stack Developer"
+          data-test="role-input"
+        /&gt;
+      &lt;/div&gt;
+      &lt;span
+        class="flex items-center h-full px-3 border-l border-r border-brand-gray-3 bg-brand-gray-2"
+        &gt;in&lt;/span
+      &gt;
+      &lt;div class="relative flex items-center flex-1 h-full ml-3"&gt;
+        &lt;label for="location" class="absolute left-0 -top-8"&gt;Location&lt;/label&gt;
+&nbsp;
+        &lt;text-input
+          v-model="location"
+          placeholder="Visakhapatnam"
+          data-test="location-input"
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;action-button
+      text="Search"
+      type="secondary"
+      class="rounded-r-3xl"
+      data-test="form-submit-button"
+    /&gt;
+  &lt;/form&gt;
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-import nextElementInList from "@/utils/nextElementInList.js";
+import ActionButton from "@/components/shared/ActionButton.vue";
+import TextInput from "@/components/shared/TextInput.vue";
+&nbsp;
 export default {
-  name: "Headline",
+  name: "JobSearchForm",
+  components: {
+    ActionButton,
+    TextInput,
+  },
   data() {
     return {
-      action: "Build",
-      interval: null,
+      role: "",
+      location: "",
     };
   },
-  computed: {
-    actionClasses() {
-      return {
-        // build: this.action === "Build",
-        // create: this.action === "Create",
-        // design: this.action === "Design",
-        // code: this.action === "Code",
-        [this.action.toLowerCase()]: true,
-      };
-    },
-  },
-  created() {
-    this.changeTitle();
-  },
-  beforeUnmount() {
-    clearInterval(this.interval);
-  },
-&nbsp;
   methods: {
-    changeTitle() {
-      this.interval = setInterval(() =&gt; {
-        const actions = ["Build", "Create", "Design", "Code"];
-        this.action = nextElementInList(actions, this.action);
-      }, 4000);
+    searchForJobs() {
+      this.$router.push({
+        name: "JobResults",
+        query: { role: this.role, location: this.location },
+      });
     },
   },
 };
 &lt;/script&gt;
-&nbsp;
-&lt;style&gt;
-.build {
-  color: #1a73eb;
-}
-.create {
-  color: #34a853;
-}
-.design {
-  color: #f9ab00;
-}
-.code {
-  color: #d93025;
-}
-&lt;/style&gt;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
