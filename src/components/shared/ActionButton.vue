@@ -39,12 +39,21 @@ export default {
 
 <style scoped>
 button {
-  @apply px-5 py-3 font-medium  border-0;
+  padding: 0.6rem 0.8rem;
+  font-weight: 500;
+  border-width: 0px;
 }
 .primary {
   @apply text-white bg-brand-blue-1 hover:shadow-blue rounded;
 }
 .secondary {
   @apply bg-transparent text-brand-blue-1 hover:bg-brand-blue-2 hover:text-white;
+}
+
+@media screen and (max-width: 500px) {
+  button {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.75rem;
+  }
 }
 </style>

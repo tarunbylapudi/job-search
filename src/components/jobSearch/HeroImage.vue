@@ -1,5 +1,5 @@
 <template>
-  <img :src="actionImg" alt="" class="w-90 h-80 object-contain mr-8" />
+  <img :src="actionImg" alt="" class="heroImg" />
 </template>
 
 <script>
@@ -49,3 +49,32 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.heroImg {
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+@media only screen and (min-width: 1001px) and (max-width: 1200px) {
+  .heroImg {
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
+}
+@media only screen and (min-width: 501px) and (max-width: 1000px) {
+  .heroImg {
+    width: 80%;
+    height: auto;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .heroImg {
+    width: 80%;
+    height: auto;
+    margin: auto;
+  }
+}
+</style>

@@ -17,3 +17,18 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+  border-radius: 1.5rem;
+}
+@media screen and (max-width: 500px) {
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+</style>

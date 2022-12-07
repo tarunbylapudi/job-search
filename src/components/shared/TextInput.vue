@@ -3,7 +3,6 @@
     type="text"
     :value="modelValue"
     :placeholder="placeholder"
-    class="w-full text-lg text-normal focus:outline-none"
     @input="inputHandler"
   />
 </template>
@@ -30,3 +29,19 @@ export default {
   },
 };
 </script>
+<style scoped>
+input {
+  font-size: 1rem;
+  line-height: 1.75rem;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+@media only screen and (max-width: 500px) {
+  input {
+    font-size: 0.8rem;
+    line-height: 2rem;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+}
+</style>

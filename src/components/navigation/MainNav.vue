@@ -1,21 +1,24 @@
 <template>
-  <header class="w-full text-sm" :class="headerHeightClass">
-    <div class="fixed top-0 left-0 w-full h-16 bg-white">
-      <div
-        class="flex flex-nowrap h-full px-8 mx-auto border-b border-solid border-brand-gray-1"
-      >
-        <router-link
-          :to="{ name: 'Home' }"
-          class="flex items-center h-full font-bold text-xl"
+  <header :class="headerHeightClass">
+    <div class="head-container">
+      <div class="nav-container">
+        <font-awesome-icon
+          :icon="['fas', 'bars']"
+          class="toggle"
+          @click="navDisplay"
+        />
+        <router-link :to="{ name: 'Home' }" class="company"
           >VitaVings</router-link
         >
-        <nav class="h-full ml-12">
-          <ul class="flex h-full p-0 m-0 list-none">
+
+        <nav id="nav">
+          <ul>
             <li
               v-for="menuItem in menuItems"
+              id="nav-item"
               :key="menuItem.text"
               data-test="main-nav-list-item"
-              class="h-full ml-9 first:ml-0"
+              @click="hideNav"
             >
               <router-link
                 :to="menuItem.url"
@@ -25,7 +28,7 @@
             </li>
           </ul>
         </nav>
-        <div class="flex items-center h-full ml-auto">
+        <div class="btn-container">
           <profile-image v-if="isLoggedIn" data-test="profile-image" />
           <action-button
             v-else
@@ -58,7 +61,6 @@ export default {
     return {
       menuItems: [
         { text: "Home", url: "/" },
-        { text: "Blog", url: "/" },
         { text: "About", url: "/" },
         { text: "contact", url: "/" },
         { text: "Pricing", url: "/" },
@@ -79,6 +81,109 @@ export default {
     loginUser() {
       this.isLoggedIn = true;
     },
+    navDisplay() {
+      let navbar = document.getElementById("nav");
+      navbar.classList.toggle("show");
+    },
+    hideNav() {
+      let navbar = document.getElementById("nav");
+      navbar.classList.remove("show");
+    },
   },
 };
 </script>
+
+<style scoped>
+header {
+  width: 100%;
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem /* 20px */;
+}
+.head-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  background-color: white;
+}
+.nav-container {
+  display: flex;
+  flex-flow: nowrap;
+  height: 100%;
+  padding-left: 2rem /* 32px */;
+  padding-right: 2rem /* 32px */;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 1px solid #dadce0;
+}
+.company {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-weight: 700;
+  font-size: 1.25rem /* 20px */;
+  line-height: 1.75rem /* 28px */;
+}
+.toggle {
+  width: 30px;
+  margin: auto 0;
+  display: none;
+}
+nav {
+  position: absolute;
+  float: left;
+  height: 100%;
+  margin-left: 9rem;
+}
+nav ul {
+  display: flex;
+  height: 100%;
+  padding: 0%;
+  margin: 0%;
+  list-style: none;
+}
+nav li {
+  margin-left: 2.25rem;
+  height: 100%;
+  font-weight: 600;
+}
+.btn-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: auto;
+}
+nav li:first-child {
+  margin-left: 0%;
+}
+@media screen and (max-width: 500px) {
+  .toggle {
+    display: inline-block;
+  }
+  .nav-container {
+    padding: 0 0.5rem;
+  }
+  nav {
+    display: none;
+    margin-left: 0;
+    margin-top: 4rem;
+  }
+  nav ul {
+    flex-direction: column;
+  }
+  nav li {
+    margin-left: 0;
+    background-color: white;
+    font-weight: 600;
+  }
+  nav.hide {
+    display: none;
+  }
+  nav.show {
+    display: block;
+  }
+}
+@media screen and (max-width: 500px) {
+}
+</style>
