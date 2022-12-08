@@ -109,6 +109,11 @@ label {
   border-color: #80868b;
   background-color: #f8f9fa;
 }
+.btn {
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  height: 100%;
+}
 
 @media only screen and (max-width: 500px) {
   form {
