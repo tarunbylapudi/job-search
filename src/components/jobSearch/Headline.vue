@@ -65,13 +65,13 @@ section {
 .headerText {
   font-weight: 700;
   letter-spacing: -0.05em;
-  font-size: 5.5rem;
+  font-size: 5rem;
   line-height: 1;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
 }
 .sub-head {
   font-weight: 400;
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   line-height: 2.25rem;
 }
 @media only screen and (max-width: 500px) {

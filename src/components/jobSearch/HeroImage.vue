@@ -52,7 +52,7 @@ export default {
 
 <style scoped>
 .heroImg {
-  width: 100%;
+  width: 80%;
   height: auto;
   margin: auto;
 }

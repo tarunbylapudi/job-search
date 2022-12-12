@@ -67,7 +67,7 @@ export default {
         { text: "Home", url: "/" },
         { text: "About", url: "/" },
         { text: "contact", url: "/" },
-        { text: "Pricing", url: "/" },
+        { text: "Teams", url: "/teams" },
         { text: "jobs", url: "/jobs/results" },
       ],
     };

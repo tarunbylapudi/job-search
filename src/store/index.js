@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
   [FETCH_JOBS]: async (context) => {
     const jobListings = await getJobs();
-    context.commit("RECIVE_JOBS", jobListings);
+    context.commit(RECIVE_JOBS, jobListings);
   },
 };
 

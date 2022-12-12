@@ -1,38 +1,61 @@
 <template>
-  <main class="flex-auto p-8 bg-brand-gray-2">
-    <ol>
-      <job-listing
-        v-for="job in displayedJobs"
-        :key="job.id"
-        :job="job"
-        data-test="job-listing"
-      />
-    </ol>
-    <div class="pagination-container">
-      <p>Page {{ currentPage }}</p>
-      <router-link
-        v-if="previousPage"
-        :to="{ name: JobResults, query: { page: previousPage } }"
-        class="link"
-        >Previous</router-link
-      >
-      <router-link
-        v-if="nextPage"
-        :to="{ name: JobResults, query: { page: nextPage } }"
-        class="link"
-        >Next</router-link
-      >
-    </div>
-  </main>
+  <div
+    v-if="isLoading"
+    class="flex h-screen items-center justify-center"
+    style="width: 87%; margin-left: 21rem"
+  >
+    <loader />
+  </div>
+  <div v-else>
+    <main class="flex-auto p-8 bg-brand-gray-2" style="margin-left: 21rem">
+      <div v-if="displayedJobs.length === 0">
+        <h2 class="error">Oops!, Something went Wrong!!!</h2>
+
+        <action-button text="Go to Home" type="primary" @click="goToHome" />
+      </div>
+      <ol v-else>
+        <job-listing
+          v-for="job in displayedJobs"
+          :key="job.id"
+          :job="job"
+          data-test="job-listing"
+        />
+      </ol>
+      <div v-if="displayedJobs.length !== 0" class="pagination-container">
+        <p>Page {{ currentPage }}</p>
+        <router-link
+          v-if="previousPage"
+          :to="{ name: JobResults, query: { page: previousPage } }"
+          class="link"
+          >Previous</router-link
+        >
+        <router-link
+          v-if="nextPage"
+          :to="{ name: JobResults, query: { page: nextPage } }"
+          class="link"
+          >Next</router-link
+        >
+      </div>
+    </main>
+  </div>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
 import { FETCH_JOBS } from "@/store";
 import JobListing from "@/components/JobResults/JobListing.vue";
+import Loader from "@/components/shared/Loader.vue";
+import ActionButton from "../shared/ActionButton.vue";
 export default {
   name: "JobListings",
   components: {
     JobListing,
+    Loader,
+    ActionButton,
+  },
+  data() {
+    return {
+      isLoading: true,
+    };
   },
   computed: {
     previousPage() {
@@ -59,8 +82,18 @@ export default {
   },
   async mounted() {
     this.FETCH_JOBS();
+    this.loadingHandler();
   },
   methods: {
+    loadingHandler() {
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 3000);
+      return null;
+    },
+    goToHome() {
+      this.$router.push({ name: "Home" });
+    },
     ...mapActions([FETCH_JOBS]),
   },
 };
@@ -72,6 +105,15 @@ export default {
   display: flex;
   flex-direction: row;
   flex-flow: nowrap;
+}
+.error {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  color: red;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  font-weight: 600;
 }
 p {
   font-size: 0.875rem /* 14px */;
