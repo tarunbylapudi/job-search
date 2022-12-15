@@ -7,7 +7,7 @@
           <action-button text="Clear filters" type="secondary" />
         </div>
       </div>
-      <accordian header="Organizations">
+      <!-- <accordian header="Organizations">
         <div>
           <fieldset>
             <ul class="filter">
@@ -46,23 +46,24 @@
             </ul>
           </fieldset>
         </div>
-      </accordian>
+      </accordian> -->
       <job-filters-sidebar-organizations />
-      <accordian header="Zinx"></accordian>
+      <job-filters-sidebar-job-type />
     </section>
   </div>
 </template>
 
 <script>
 import ActionButton from "@/components/shared/ActionButton.vue";
-import Accordian from "@/components/shared/Accordian.vue";
 import JobFiltersSidebarOrganizations from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarOrganizations.vue";
+import JobFiltersSidebarJobType from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarJobType.vue";
 export default {
   name: "JobFilterSidebar",
   components: {
     ActionButton,
-    Accordian,
+    // Accordian,
     JobFiltersSidebarOrganizations,
+    JobFiltersSidebarJobType,
   },
 };
 </script>

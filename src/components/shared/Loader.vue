@@ -11,7 +11,12 @@ export default { name: "Loader" };
 </script>
 <style scoped>
 .google-loader {
-  display: block;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 7rem;
 }
 .google-loader span {
   display: inline-block;

@@ -1,61 +1,46 @@
 <template>
-  <div
-    v-if="isLoading"
-    class="flex h-screen items-center justify-center"
-    style="width: 87%; margin-left: 21rem"
-  >
-    <loader />
-  </div>
-  <div v-else>
-    <main class="flex-auto p-8 bg-brand-gray-2" style="margin-left: 21rem">
-      <div v-if="displayedJobs.length === 0">
-        <h2 class="error">Oops!, Something went Wrong!!!</h2>
+  <main class="flex-auto p-8 bg-brand-gray-2" style="margin-left: 21rem">
+    <div v-if="displayedJobs.length === 0">
+      <h2 class="error">Oops!, Something went Wrong!!!</h2>
 
-        <action-button text="Go to Home" type="primary" @click="goToHome" />
-      </div>
-      <ol v-else>
-        <job-listing
-          v-for="job in displayedJobs"
-          :key="job.id"
-          :job="job"
-          data-test="job-listing"
-        />
-      </ol>
-      <div v-if="displayedJobs.length !== 0" class="pagination-container">
-        <p>Page {{ currentPage }}</p>
-        <router-link
-          v-if="previousPage"
-          :to="{ name: JobResults, query: { page: previousPage } }"
-          class="link"
-          >Previous</router-link
-        >
-        <router-link
-          v-if="nextPage"
-          :to="{ name: JobResults, query: { page: nextPage } }"
-          class="link"
-          >Next</router-link
-        >
-      </div>
-    </main>
-  </div>
+      <action-button text="Go to Home" type="primary" @click="zinx" />
+    </div>
+    <ol v-else>
+      <job-listing
+        v-for="job in displayedJobs"
+        :key="job.id"
+        :job="job"
+        data-test="job-listing"
+      />
+    </ol>
+    <div v-if="displayedJobs.length !== 0" class="pagination-container">
+      <p>Page {{ currentPage }}</p>
+      <router-link
+        v-if="previousPage"
+        :to="{ path: JobResults, query: { page: previousPage } }"
+        class="link"
+        >Previous</router-link
+      >
+      <router-link
+        v-if="nextPage"
+        :to="{ name: JobResults, query: { page: nextPage } }"
+        class="link"
+        >Next</router-link
+      >
+    </div>
+  </main>
 </template>
 <script>
-import { mapActions, mapState } from "vuex";
-import { FETCH_JOBS } from "@/store";
+import { mapActions, mapGetters } from "vuex";
+import { FETCH_JOBS, FILTERED_JOBS } from "@/store/constants";
 import JobListing from "@/components/JobResults/JobListing.vue";
-import Loader from "@/components/shared/Loader.vue";
 import ActionButton from "../shared/ActionButton.vue";
 export default {
   name: "JobListings",
   components: {
     JobListing,
-    Loader,
+
     ActionButton,
-  },
-  data() {
-    return {
-      isLoading: true,
-    };
   },
   computed: {
     previousPage() {
@@ -65,7 +50,7 @@ export default {
     },
     nextPage() {
       const nextPage = this.currentPage + 1;
-      const maxPage = this.jobs.length / 10;
+      const maxPage = Math.ceil(this.FILTERED_JOBS.length / 10);
       return nextPage <= maxPage ? nextPage : undefined;
     },
     currentPage() {
@@ -76,20 +61,20 @@ export default {
       const pageNumber = this.currentPage;
       const firstPageIndex = (pageNumber - 1) * 10;
       const lastPageIndex = pageNumber * 10;
-      return this.jobs.slice(firstPageIndex, lastPageIndex);
+      return this.FILTERED_JOBS.slice(firstPageIndex, lastPageIndex);
     },
-    ...mapState(["jobs"]),
+
+    ...mapGetters([FILTERED_JOBS]),
   },
   async mounted() {
     this.FETCH_JOBS();
-    this.loadingHandler();
   },
   methods: {
-    loadingHandler() {
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 3000);
-      return null;
+    zinx() {
+      fetch("/d.json")
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.log(error));
     },
     goToHome() {
       this.$router.push({ name: "Home" });

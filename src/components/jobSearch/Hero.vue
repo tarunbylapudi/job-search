@@ -6,7 +6,7 @@
       <spotlight class="spotlight-container">
         <template #default="{ img, title, description }">
           <router-link :to="{ name: 'JobResults' }" class="spotlight-card">
-            <img :src="img" class="object-contain m-auto" />
+            <img :src="img" />
             <div class="h-45 px-6 py-2 mt-3">
               <h3 class="text-lg font-medium">
                 {{ title }}
@@ -52,7 +52,7 @@ export default {
 }
 .spotlight {
   grid-area: spotlight;
-  margin: 5rem 0;
+  margin: 2.5rem 0;
 }
 
 .grid-container {
@@ -61,7 +61,7 @@ export default {
   background-color: white;
   padding: 10px;
   margin: 2rem 4rem 0;
-  grid-template-areas: "headLine headLineImg " "spotlight spotlight";
+  grid-template-areas: "headLine headLineImg" "spotlight spotlight";
 }
 
 /* spotlight */

@@ -1,21 +1,21 @@
 <template>
-  <accordian header="Organizations">
+  <accordian header="Job Types">
     <fieldset>
       <ul class="filter">
         <li
-          v-for="organization in UNIQUE_ORGANIZATIONS"
-          :key="organization"
+          v-for="jobType in UNIQUE_JOB_TYPES"
+          :key="jobType"
           class="filter-option"
         >
           <input
-            :id="organization"
-            v-model="selectedOrganizations"
-            :value="organization"
+            :id="jobType"
+            v-model="selectedJobTypes"
+            :value="jobType"
             type="checkbox"
             style="margin-right: 0.5rem"
-            @change="selectOrganizations"
+            @change="selectJobType"
           />
-          <label :for="organization">{{ organization }}</label>
+          <label :for="jobType">{{ jobType }}</label>
         </li>
       </ul>
     </fieldset>
@@ -25,18 +25,15 @@
 <script>
 import Accordian from "@/components/shared/Accordian.vue";
 import { mapGetters, mapMutations } from "vuex";
-import {
-  UNIQUE_ORGANIZATIONS,
-  ADD_SELECTED_ORGANIZATIONS,
-} from "@/store/constants";
+import { UNIQUE_JOB_TYPES, ADD_SELECTED_JOB_TYPES } from "@/store/constants";
 export default {
-  name: "JobFiltersSidebarOrganizations",
+  name: "JobFiltersSidebarJobTypes",
   components: {
     Accordian,
   },
   data() {
     return {
-      selectedOrganizations: [],
+      selectedJobTypes: [],
     };
   },
   computed: {
@@ -44,12 +41,12 @@ export default {
     //   return this.$store.getters.UNIQUE_ORGANIZATIONS;
     // },
 
-    ...mapGetters([UNIQUE_ORGANIZATIONS]),
+    ...mapGetters([UNIQUE_JOB_TYPES]),
   },
   methods: {
-    ...mapMutations([ADD_SELECTED_ORGANIZATIONS]),
-    selectOrganizations() {
-      this.ADD_SELECTED_ORGANIZATIONS(this.selectedOrganizations);
+    ...mapMutations([ADD_SELECTED_JOB_TYPES]),
+    selectJobType() {
+      this.ADD_SELECTED_JOB_TYPES(this.selectedJobTypes);
       this.$router.push({ name: "JobResults" });
     },
   },

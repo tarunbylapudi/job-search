@@ -40,8 +40,6 @@ input {
   input {
     font-size: 0.8rem;
     line-height: 2rem;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
   }
 }
 </style>
