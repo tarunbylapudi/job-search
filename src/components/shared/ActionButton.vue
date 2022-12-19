@@ -5,10 +5,9 @@
 </template>
 
 <script>
+import { computed, toRefs } from "vue";
 export default {
   name: "ActionBUtton",
-
-  //props: ["text", "type"],
 
   props: {
     text: {
@@ -24,16 +23,23 @@ export default {
       },
     },
   },
-
-  computed: {
-    buttonClass() {
-      return {
-        [this.type]: true,
-        // primary: this.type === "primary",
-        // secondary: this.type === "secondary",
-      };
-    },
+  setup(props) {
+    const { type } = toRefs(props);
+    const buttonClass = computed(() => {
+      return { [type.value]: true };
+    });
+    return { buttonClass };
   },
+
+  // computed: {
+  //   buttonClass() {
+  //     return {
+  //       [this.type]: true,
+  //       // primary: this.type === "primary",
+  //       // secondary: this.type === "secondary",
+  //     };
+  //   },
+  // },
 };
 </script>
 

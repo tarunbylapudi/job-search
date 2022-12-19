@@ -7,63 +7,46 @@
           <action-button text="Clear filters" type="secondary" />
         </div>
       </div>
-      <!-- <accordian header="Organizations">
-        <div>
-          <fieldset>
-            <ul class="filter">
-              <li class="filter-option">
-                <input
-                  id="VueTube"
-                  type="checkbox"
-                  style="margin-right: 0.5rem"
-                />
-                <label for="VueTube">VueTube</label>
-              </li>
-              <li class="filter-option">
-                <input
-                  id="Between Vue and Me"
-                  type="checkbox"
-                  style="margin-right: 0.5rem"
-                />
-                <label for="Between Vue and Me">Between Vue and Me</label>
-              </li>
-              <li class="filter-option">
-                <input
-                  id="Et Vue Brute"
-                  type="checkbox"
-                  style="margin-right: 0.5rem"
-                />
-                <label for="Et Vue Brute">Et Vue Brute</label>
-              </li>
-              <li class="filter-option">
-                <input
-                  id="Vue and a Half Men"
-                  type="checkbox"
-                  style="margin-right: 0.5rem"
-                />
-                <label for="Vue and a Half Men">Vue and a Half Men</label>
-              </li>
-            </ul>
-          </fieldset>
-        </div>
-      </accordian> -->
-      <job-filters-sidebar-organizations />
-      <job-filters-sidebar-job-type />
+      <job-filters-sidebar-checkbox-group
+        header="Organizations"
+        :unique-values="uniqueOrganizations"
+        mutation="ADD_SELECTED_ORGANIZATIONS"
+      />
+      <job-filters-sidebar-checkbox-group
+        header="Job Type"
+        :unique-values="uniqueJobTypes"
+        mutation="ADD_SELECTED_JOB_TYPES"
+      />
     </section>
   </div>
 </template>
 
 <script>
 import ActionButton from "@/components/shared/ActionButton.vue";
-import JobFiltersSidebarOrganizations from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarOrganizations.vue";
-import JobFiltersSidebarJobType from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarJobType.vue";
+import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarCheckboxGroup.vue";
+import {
+  ADD_SELECTED_JOB_TYPES,
+  ADD_SELECTED_ORGANIZATIONS,
+} from "@/store/constants";
+import {
+  useUniqueJobTypes,
+  useUniqueOriganizations,
+} from "@/store/composables";
 export default {
   name: "JobFilterSidebar",
   components: {
     ActionButton,
-    // Accordian,
-    JobFiltersSidebarOrganizations,
-    JobFiltersSidebarJobType,
+    JobFiltersSidebarCheckboxGroup,
+  },
+  setup() {
+    const uniqueOrganizations = useUniqueOriganizations();
+    const uniqueJobTypes = useUniqueJobTypes();
+    return {
+      uniqueOrganizations,
+      uniqueJobTypes,
+      ADD_SELECTED_JOB_TYPES,
+      ADD_SELECTED_ORGANIZATIONS,
+    };
   },
 };
 </script>

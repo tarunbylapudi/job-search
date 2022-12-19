@@ -16,17 +16,31 @@
 </template>
 <script>
 import axios from "axios";
+import { ref, onMounted } from "vue";
 export default {
   name: "Spotlight",
-  data() {
-    return { spotlights: [] };
+  setup() {
+    const spotlights = ref([]);
+    const getSpotlights = async () => {
+      const baseurl = process.env.VUE_APP_API_URL;
+      const url = `${baseurl}/spotlights`;
+      const response = await axios.get(url);
+      spotlights.value = response.data;
+    };
+
+    onMounted(getSpotlights);
+
+    return { spotlights };
   },
-  async mounted() {
-    const baseurl = process.env.VUE_APP_API_URL;
-    const url = `${baseurl}/spotlights`;
-    const response = await axios.get(url);
-    this.spotlights = response.data;
-  },
+  // data() {
+  //   return { spotlights: [] };
+  // },
+  // async mounted() {
+  //   const baseurl = process.env.VUE_APP_API_URL;
+  //   const url = `${baseurl}/spotlights`;
+  //   const response = await axios.get(url);
+  //   this.spotlights = response.data;
+  // },
 };
 </script>
 

@@ -3,7 +3,7 @@
     <fieldset>
       <ul class="filter">
         <li
-          v-for="organization in UNIQUE_ORGANIZATIONS"
+          v-for="organization in uniqueOrganizations"
           :key="organization"
           class="filter-option"
         >
@@ -23,36 +23,49 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
 import Accordian from "@/components/shared/Accordian.vue";
-import { mapGetters, mapMutations } from "vuex";
-import {
-  UNIQUE_ORGANIZATIONS,
-  ADD_SELECTED_ORGANIZATIONS,
-} from "@/store/constants";
+import { ADD_SELECTED_ORGANIZATIONS } from "@/store/constants";
+import { useUniqueOriganizations } from "@/store/composables";
 export default {
   name: "JobFiltersSidebarOrganizations",
   components: {
     Accordian,
   },
-  data() {
-    return {
-      selectedOrganizations: [],
-    };
-  },
-  computed: {
-    // UNIQUE_ORGANIZATIONS() {
-    //   return this.$store.getters.UNIQUE_ORGANIZATIONS;
-    // },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
 
-    ...mapGetters([UNIQUE_ORGANIZATIONS]),
+    const selectedOrganizations = ref([]);
+    const uniqueOrganizations = useUniqueOriganizations();
+    const selectOrganizations = () => {
+      store.commit(ADD_SELECTED_ORGANIZATIONS, selectedOrganizations.value);
+      router.push({ name: "JobResults" });
+    };
+    return { selectedOrganizations, uniqueOrganizations, selectOrganizations };
   },
-  methods: {
-    ...mapMutations([ADD_SELECTED_ORGANIZATIONS]),
-    selectOrganizations() {
-      this.ADD_SELECTED_ORGANIZATIONS(this.selectedOrganizations);
-      this.$router.push({ name: "JobResults" });
-    },
-  },
+  // data() {
+  //   return {
+  //     selectedOrganizations: [],
+  //   };
+  // },
+  // computed: {
+  //   // UNIQUE_ORGANIZATIONS() {
+  //   //   return this.$store.getters.UNIQUE_ORGANIZATIONS;
+  //   // },
+
+  //   ...mapGetters([UNIQUE_ORGANIZATIONS]),
+  // },
+  // methods: {
+  //   ...mapMutations([ADD_SELECTED_ORGANIZATIONS]),
+  //   selectOrganizations() {
+  //     this.ADD_SELECTED_ORGANIZATIONS(this.selectedOrganizations);
+  //     this.$router.push({ name: "JobResults" });
+  //   },
+  // },
 };
 </script>
 <style scoped>

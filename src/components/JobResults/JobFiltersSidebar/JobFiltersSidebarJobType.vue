@@ -3,7 +3,7 @@
     <fieldset>
       <ul class="filter">
         <li
-          v-for="jobType in UNIQUE_JOB_TYPES"
+          v-for="jobType in uniqueJobTypes"
           :key="jobType"
           class="filter-option"
         >
@@ -24,32 +24,44 @@
 
 <script>
 import Accordian from "@/components/shared/Accordian.vue";
-import { mapGetters, mapMutations } from "vuex";
-import { UNIQUE_JOB_TYPES, ADD_SELECTED_JOB_TYPES } from "@/store/constants";
+import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { ADD_SELECTED_JOB_TYPES } from "@/store/constants";
+
+import { useUniqueJobTypes } from "@/store/composables";
 export default {
   name: "JobFiltersSidebarJobTypes",
   components: {
     Accordian,
   },
-  data() {
-    return {
-      selectedJobTypes: [],
-    };
-  },
-  computed: {
-    // UNIQUE_ORGANIZATIONS() {
-    //   return this.$store.getters.UNIQUE_ORGANIZATIONS;
-    // },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
 
-    ...mapGetters([UNIQUE_JOB_TYPES]),
+    const selectedJobTypes = ref([]);
+    const uniqueJobTypes = useUniqueJobTypes();
+    const selectJobType = () => {
+      store.commit(ADD_SELECTED_JOB_TYPES, selectedJobTypes.value);
+      router.push({ name: "JobResults" });
+    };
+    return { selectedJobTypes, uniqueJobTypes, selectJobType };
   },
-  methods: {
-    ...mapMutations([ADD_SELECTED_JOB_TYPES]),
-    selectJobType() {
-      this.ADD_SELECTED_JOB_TYPES(this.selectedJobTypes);
-      this.$router.push({ name: "JobResults" });
-    },
-  },
+  // data() {
+  //   return {
+  //     selectedJobTypes: [],
+  //   };
+  // },
+  // computed: {
+  //   ...mapGetters([UNIQUE_JOB_TYPES]),
+  // },
+  // methods: {
+  //   ...mapMutations([ADD_SELECTED_JOB_TYPES]),
+  //   selectJobType() {
+  //     this.ADD_SELECTED_JOB_TYPES(this.selectedJobTypes);
+  //     this.$router.push({ name: "JobResults" });
+  //   },
+  // },
 };
 </script>
 <style scoped>

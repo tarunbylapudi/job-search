@@ -10,6 +10,7 @@
   </div>
 </template>
 <script>
+import { ref, computed } from "vue";
 export default {
   name: "Accordian",
   props: {
@@ -18,21 +19,31 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      isOpen: false,
+  setup() {
+    const isOpen = ref(false);
+    const fontIconHandler = computed(() =>
+      isOpen.value ? ["fas", "angle-up"] : ["fas", "angle-down"]
+    );
+    const filterToggleHandler = () => {
+      isOpen.value = !isOpen.value;
     };
+    return { isOpen, fontIconHandler, filterToggleHandler };
   },
-  computed: {
-    fontIconHandler() {
-      return this.isOpen ? ["fas", "angle-up"] : ["fas", "angle-down"];
-    },
-  },
-  methods: {
-    filterToggleHandler() {
-      this.isOpen = !this.isOpen;
-    },
-  },
+  // data() {
+  //   return {
+  //     isOpen: false,
+  //   };
+  // },
+  // computed: {
+  //   fontIconHandler() {
+  //     return this.isOpen ? ["fas", "angle-up"] : ["fas", "angle-down"];
+  //   },
+  // },
+  // methods: {
+  //   filterToggleHandler() {
+  //     this.isOpen = !this.isOpen;
+  //   },
+  // },
 };
 </script>
 <style scoped>

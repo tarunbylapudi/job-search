@@ -17,7 +17,7 @@
       <p>Page {{ currentPage }}</p>
       <router-link
         v-if="previousPage"
-        :to="{ path: JobResults, query: { page: previousPage } }"
+        :to="{ name: JobResults, query: { page: previousPage } }"
         class="link"
         >Previous</router-link
       >
@@ -31,8 +31,11 @@
   </main>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
-import { FETCH_JOBS, FILTERED_JOBS } from "@/store/constants";
+import { onMounted, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useFilteredJobs, useFetchJobs } from "@/store/composables";
+//import { usePreviousAndNextPages } from "@/composables/usePreviousAndNextPages";
+
 import JobListing from "@/components/JobResults/JobListing.vue";
 import ActionButton from "../shared/ActionButton.vue";
 export default {
@@ -42,32 +45,46 @@ export default {
 
     ActionButton,
   },
-  computed: {
-    previousPage() {
-      const previousPage = this.currentPage - 1;
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+
+    onMounted(useFetchJobs);
+
+    const goToHome = () => router.push({ name: "Home" });
+
+    const filteredJobs = useFilteredJobs();
+
+    const currentPage = computed(() => {
+      const pageString = route.query.page || "1";
+      return +pageString;
+    });
+
+    // const maxPage = computed(() => Math.ceil(filteredJobs.value.length / 10));
+    // const { previousPage, nextPage } = usePreviousAndNextPages(
+    //   currentPage,
+    //   maxPage
+    // );
+    const previousPage = computed(() => {
+      const previousPage = currentPage.value - 1;
       const firstPage = 1;
       return previousPage >= firstPage ? previousPage : undefined;
-    },
-    nextPage() {
-      const nextPage = this.currentPage + 1;
-      const maxPage = Math.ceil(this.FILTERED_JOBS.length / 10);
+    });
+
+    const nextPage = computed(() => {
+      const nextPage = currentPage.value + 1;
+      const maxPage = Math.ceil(filteredJobs.value.length / 10);
       return nextPage <= maxPage ? nextPage : undefined;
-    },
-    currentPage() {
-      const pageString = this.$route.query.page || "1";
-      return +pageString;
-    },
-    displayedJobs() {
-      const pageNumber = this.currentPage;
+    });
+
+    const displayedJobs = computed(() => {
+      const pageNumber = currentPage.value;
       const firstPageIndex = (pageNumber - 1) * 10;
       const lastPageIndex = pageNumber * 10;
-      return this.FILTERED_JOBS.slice(firstPageIndex, lastPageIndex);
-    },
+      return filteredJobs.value.slice(firstPageIndex, lastPageIndex);
+    });
 
-    ...mapGetters([FILTERED_JOBS]),
-  },
-  async mounted() {
-    this.FETCH_JOBS();
+    return { goToHome, currentPage, nextPage, previousPage, displayedJobs };
   },
   methods: {
     zinx() {
@@ -76,10 +93,10 @@ export default {
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
     },
-    goToHome() {
-      this.$router.push({ name: "Home" });
-    },
-    ...mapActions([FETCH_JOBS]),
+    // goToHome() {
+    //   this.$router.push({ name: "Home" });
+    // },
+    // ...mapActions([FETCH_JOBS]),
   },
 };
 </script>
