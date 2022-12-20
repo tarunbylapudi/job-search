@@ -2,11 +2,7 @@
   <header :class="headerHeightClass">
     <div class="head-container">
       <div class="nav-container">
-        <font-awesome-icon
-          :icon="['fas', 'bars']"
-          class="toggle"
-          @click="navDisplay"
-        />
+        <font-awesome-icon :icon="['fas', 'bars']" class="toggle" />
         <router-link :to="{ name: 'Home' }" class="company"
           >VitaVings</router-link
         >
@@ -18,7 +14,6 @@
               id="nav-item"
               :key="menuItem.text"
               data-test="main-nav-list-item"
-              @click="hideNav"
             >
               <router-link
                 :to="menuItem.url"
@@ -44,7 +39,8 @@
   </header>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { mapState, mapMutations } from "vuex";
 
 import ActionButton from "@/components/shared/ActionButton.vue";
@@ -53,7 +49,11 @@ import Subnav from "@/components/navigation/Subnav.vue";
 
 import { LOGIN_USER } from "@/store/constants";
 
-export default {
+interface HeaderHeight {
+  [x: string]: boolean;
+}
+
+export default defineComponent({
   name: "MainNav",
   components: {
     ActionButton,
@@ -73,7 +73,7 @@ export default {
     };
   },
   computed: {
-    headerHeightClass() {
+    headerHeightClass(): HeaderHeight {
       return {
         "h-16": !this.isLoggedIn,
         "h-28": this.isLoggedIn,
@@ -96,16 +96,16 @@ export default {
 
     ...mapMutations([LOGIN_USER]),
 
-    navDisplay() {
-      let navbar = document.getElementById("nav");
-      navbar.classList.toggle("show");
-    },
-    hideNav() {
-      let navbar = document.getElementById("nav");
-      navbar.classList.remove("show");
-    },
+    // navDisplay() {
+    //   let navbar = document.getElementById("nav");
+    //   navbar.classList.toggle("show");
+    // },
+    // hideNav() {
+    //   let navbar = document.getElementById("nav");
+    //   navbar.classList.remove("show");
+    // },
   },
-};
+});
 </script>
 
 <style scoped>

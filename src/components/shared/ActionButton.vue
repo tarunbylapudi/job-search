@@ -4,9 +4,10 @@
   </button>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { computed, toRefs } from "vue";
-export default {
+export default defineComponent({
   name: "ActionBUtton",
 
   props: {
@@ -18,7 +19,7 @@ export default {
       type: String,
       required: false,
       default: "primary",
-      validator(value) {
+      validator: (value: string) => {
         return ["primary", "secondary"].includes(value);
       },
     },
@@ -40,7 +41,7 @@ export default {
   //     };
   //   },
   // },
-};
+});
 </script>
 
 <style scoped>

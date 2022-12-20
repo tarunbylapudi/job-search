@@ -9,9 +9,10 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { ref, computed } from "vue";
-export default {
+export default defineComponent({
   name: "Accordian",
   props: {
     header: {
@@ -44,7 +45,7 @@ export default {
   //     this.isOpen = !this.isOpen;
   //   },
   // },
-};
+});
 </script>
 <style scoped>
 .accordian {

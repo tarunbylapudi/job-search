@@ -25,13 +25,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import Headline from "@/components/jobSearch/Headline.vue";
 import JobSearchForm from "@/components/jobSearch/JobSearchForm.vue";
 import HeroImage from "@/components/jobSearch/HeroImage.vue";
 import Spotlight from "@/components/jobSearch/Spotlight.vue";
 
-export default {
+export default defineComponent({
   name: "Hero",
   components: {
     Headline,
@@ -39,7 +40,7 @@ export default {
     HeroImage,
     Spotlight,
   },
-};
+});
 </script>
 
 <style scoped>

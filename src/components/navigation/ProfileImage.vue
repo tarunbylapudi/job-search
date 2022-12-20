@@ -6,8 +6,9 @@
     class="w-10 h-10 object-contain rounded-3xl"
   />
 </template>
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "ProfileImage",
   data() {
     return {
@@ -15,7 +16,7 @@ export default {
         "https://www.pngall.com/wp-content/uploads/5/User-Profile.png",
     };
   },
-};
+});
 </script>
 
 <style scoped>

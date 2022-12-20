@@ -1,8 +1,8 @@
 <template>
-  <div class="flex pb-5">
-    <h3 class="text-sm font-semibold">SPOTLIGHT</h3>
-  </div>
   <div>
+    <div class="flex pb-5">
+      <h3 class="text-sm font-semibold">SPOTLIGHT</h3>
+    </div>
     <ul>
       <li v-for="spotlight in spotlights" :key="spotlight.id">
         <slot
@@ -14,17 +14,25 @@
     </ul>
   </div>
 </template>
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import axios from "axios";
 import { ref, onMounted } from "vue";
-export default {
+
+interface Spotlight {
+  id: number;
+  img: string;
+  title: string;
+  description: string;
+}
+export default defineComponent({
   name: "Spotlight",
   setup() {
-    const spotlights = ref([]);
+    const spotlights = ref<Spotlight[]>([]);
     const getSpotlights = async () => {
       const baseurl = process.env.VUE_APP_API_URL;
       const url = `${baseurl}/spotlights`;
-      const response = await axios.get(url);
+      const response = await axios.get<Spotlight[]>(url);
       spotlights.value = response.data;
     };
 
@@ -41,7 +49,7 @@ export default {
   //   const response = await axios.get(url);
   //   this.spotlights = response.data;
   // },
-};
+});
 </script>
 
 <style scoped>

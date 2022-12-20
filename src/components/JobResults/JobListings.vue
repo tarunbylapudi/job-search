@@ -17,28 +17,29 @@
       <p>Page {{ currentPage }}</p>
       <router-link
         v-if="previousPage"
-        :to="{ name: JobResults, query: { page: previousPage } }"
+        :to="{ name: 'JobResults', query: { page: previousPage } }"
         class="link"
         >Previous</router-link
       >
       <router-link
         v-if="nextPage"
-        :to="{ name: JobResults, query: { page: nextPage } }"
+        :to="{ name: 'JobResults', query: { page: nextPage } }"
         class="link"
         >Next</router-link
       >
     </div>
   </main>
 </template>
-<script>
-import { onMounted, computed } from "vue";
+<script lang="ts">
+import { defineComponent } from "vue";
+import { computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useFilteredJobs, useFetchJobs } from "@/store/composables";
 //import { usePreviousAndNextPages } from "@/composables/usePreviousAndNextPages";
 
 import JobListing from "@/components/JobResults/JobListing.vue";
 import ActionButton from "../shared/ActionButton.vue";
-export default {
+export default defineComponent({
   name: "JobListings",
   components: {
     JobListing,
@@ -49,7 +50,7 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    onMounted(useFetchJobs);
+    useFetchJobs();
 
     const goToHome = () => router.push({ name: "Home" });
 
@@ -98,7 +99,7 @@ export default {
     // },
     // ...mapActions([FETCH_JOBS]),
   },
-};
+});
 </script>
 
 <style scoped>

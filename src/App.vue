@@ -1,20 +1,24 @@
 <template>
   <div>
     <main-nav />
-    <router-view />
+    <loader v-if="isLoading" />
+    <router-view v-else />
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { mapState } from "vuex";
 import MainNav from "@/components/navigation/MainNav.vue";
-export default {
+import Loader from "@/components/shared/Loader.vue";
+export default defineComponent({
   name: "App",
   components: {
     MainNav,
+    Loader,
   },
   computed: {
     ...mapState(["isLoading"]),
   },
-};
+});
 </script>

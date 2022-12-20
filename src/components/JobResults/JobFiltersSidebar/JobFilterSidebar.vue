@@ -21,7 +21,8 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import ActionButton from "@/components/shared/ActionButton.vue";
 import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarCheckboxGroup.vue";
 import {
@@ -32,7 +33,7 @@ import {
   useUniqueJobTypes,
   useUniqueOriganizations,
 } from "@/store/composables";
-export default {
+export default defineComponent({
   name: "JobFilterSidebar",
   components: {
     ActionButton,
@@ -48,7 +49,7 @@ export default {
       ADD_SELECTED_ORGANIZATIONS,
     };
   },
-};
+});
 </script>
 
 <style scoped>

@@ -3,10 +3,11 @@
   <button @click="goToHome">go to Home</button>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import router from "@/router";
 
-export default {
+export default defineComponent({
   name: "JobSearchView",
   computed: {
     zinx() {
@@ -20,5 +21,5 @@ export default {
       router.push({ name: "Home" });
     },
   },
-};
+});
 </script>
