@@ -1,8 +1,8 @@
 <template>
+  <div class="flex pb-5">
+    <h3 class="text-sm font-semibold">SPOTLIGHT</h3>
+  </div>
   <div>
-    <div class="flex pb-5">
-      <h3 class="text-sm font-semibold">SPOTLIGHT</h3>
-    </div>
     <ul>
       <li v-for="spotlight in spotlights" :key="spotlight.id">
         <slot

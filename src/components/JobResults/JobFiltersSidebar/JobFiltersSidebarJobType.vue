@@ -1,79 +1,27 @@
 <template>
-  <accordian header="Job Types">
-    <fieldset>
-      <ul class="filter">
-        <li
-          v-for="jobType in uniqueJobTypes"
-          :key="jobType"
-          class="filter-option"
-        >
-          <input
-            :id="jobType"
-            v-model="selectedJobTypes"
-            :value="jobType"
-            type="checkbox"
-            style="margin-right: 0.5rem"
-            @change="selectJobType"
-          />
-          <label :for="jobType">{{ jobType }}</label>
-        </li>
-      </ul>
-    </fieldset>
-  </accordian>
+  <job-filters-sidebar-checkbox-group
+    :unique-values="uniqueJobTypes"
+    mutation="ADD_SELECTED_JOB_TYPES"
+  />
 </template>
 
 <script>
-import Accordian from "@/components/shared/Accordian.vue";
-import { ref } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { defineComponent } from "vue";
+import JobFiltersSidebarCheckboxGroup from "./JobFiltersSidebarCheckboxGroup.vue";
 import { ADD_SELECTED_JOB_TYPES } from "@/store/constants";
-
 import { useUniqueJobTypes } from "@/store/composables";
-export default {
-  name: "JobFiltersSidebarJobTypes",
+
+export default defineComponent({
+  name: "JobFiltersSidebarJobType",
   components: {
-    Accordian,
+    JobFiltersSidebarCheckboxGroup,
   },
   setup() {
-    const store = useStore();
-    const router = useRouter();
-
-    const selectedJobTypes = ref([]);
     const uniqueJobTypes = useUniqueJobTypes();
-    const selectJobType = () => {
-      store.commit(ADD_SELECTED_JOB_TYPES, selectedJobTypes.value);
-      router.push({ name: "JobResults" });
+    return {
+      uniqueJobTypes,
+      ADD_SELECTED_JOB_TYPES,
     };
-    return { selectedJobTypes, uniqueJobTypes, selectJobType };
   },
-  // data() {
-  //   return {
-  //     selectedJobTypes: [],
-  //   };
-  // },
-  // computed: {
-  //   ...mapGetters([UNIQUE_JOB_TYPES]),
-  // },
-  // methods: {
-  //   ...mapMutations([ADD_SELECTED_JOB_TYPES]),
-  //   selectJobType() {
-  //     this.ADD_SELECTED_JOB_TYPES(this.selectedJobTypes);
-  //     this.$router.push({ name: "JobResults" });
-  //   },
-  // },
-};
+});
 </script>
-<style scoped>
-.filter {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.filter-option {
-  width: 50%;
-  height: 2rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-</style>

@@ -1,83 +1,26 @@
 <template>
-  <accordian header="Organizations">
-    <fieldset>
-      <ul class="filter">
-        <li
-          v-for="organization in uniqueOrganizations"
-          :key="organization"
-          class="filter-option"
-        >
-          <input
-            :id="organization"
-            v-model="selectedOrganizations"
-            :value="organization"
-            type="checkbox"
-            style="margin-right: 0.5rem"
-            @change="selectOrganizations"
-          />
-          <label :for="organization">{{ organization }}</label>
-        </li>
-      </ul>
-    </fieldset>
-  </accordian>
+  <job-filters-sidebar-checkbox-group
+    :unique-values="uniqueOrganizations"
+    mutation="ADD_SELECTED_ORGANIZATIONS"
+  />
 </template>
 
 <script>
-import { ref } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
-
-import Accordian from "@/components/shared/Accordian.vue";
+import { defineComponent } from "vue";
+import JobFiltersSidebarCheckboxGroup from "./JobFiltersSidebarCheckboxGroup.vue";
 import { ADD_SELECTED_ORGANIZATIONS } from "@/store/constants";
 import { useUniqueOriganizations } from "@/store/composables";
-export default {
-  name: "JobFiltersSidebarOrganizations",
+export default defineComponent({
+  name: "JobFilterSidebarOrganizations",
   components: {
-    Accordian,
+    JobFiltersSidebarCheckboxGroup,
   },
   setup() {
-    const store = useStore();
-    const router = useRouter();
-
-    const selectedOrganizations = ref([]);
     const uniqueOrganizations = useUniqueOriganizations();
-    const selectOrganizations = () => {
-      store.commit(ADD_SELECTED_ORGANIZATIONS, selectedOrganizations.value);
-      router.push({ name: "JobResults" });
+    return {
+      ADD_SELECTED_ORGANIZATIONS,
+      uniqueOrganizations,
     };
-    return { selectedOrganizations, uniqueOrganizations, selectOrganizations };
   },
-  // data() {
-  //   return {
-  //     selectedOrganizations: [],
-  //   };
-  // },
-  // computed: {
-  //   // UNIQUE_ORGANIZATIONS() {
-  //   //   return this.$store.getters.UNIQUE_ORGANIZATIONS;
-  //   // },
-
-  //   ...mapGetters([UNIQUE_ORGANIZATIONS]),
-  // },
-  // methods: {
-  //   ...mapMutations([ADD_SELECTED_ORGANIZATIONS]),
-  //   selectOrganizations() {
-  //     this.ADD_SELECTED_ORGANIZATIONS(this.selectedOrganizations);
-  //     this.$router.push({ name: "JobResults" });
-  //   },
-  // },
-};
+});
 </script>
-<style scoped>
-.filter {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.filter-option {
-  width: 50%;
-  height: 2rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-</style>

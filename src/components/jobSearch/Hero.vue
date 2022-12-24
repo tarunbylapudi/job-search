@@ -21,6 +21,11 @@
           </router-link>
         </template>
       </spotlight>
+      <image-public>
+        <template #default="{ url }">
+          <img class="inline-block object-contain m-2" :src="url" alt="" />
+        </template>
+      </image-public>
     </div>
   </div>
 </template>
@@ -31,6 +36,7 @@ import Headline from "@/components/jobSearch/Headline.vue";
 import JobSearchForm from "@/components/jobSearch/JobSearchForm.vue";
 import HeroImage from "@/components/jobSearch/HeroImage.vue";
 import Spotlight from "@/components/jobSearch/Spotlight.vue";
+import ImagePublic from "./ImagePublic.vue";
 
 export default defineComponent({
   name: "Hero",
@@ -39,6 +45,7 @@ export default defineComponent({
     JobSearchForm,
     HeroImage,
     Spotlight,
+    ImagePublic,
   },
 });
 </script>

@@ -32,9 +32,13 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useFilteredJobs, useFetchJobs } from "@/store/composables";
+import {
+  useFilteredJobs,
+  useFetchJobs,
+  useFetchDegrees,
+} from "@/store/composables";
 //import { usePreviousAndNextPages } from "@/composables/usePreviousAndNextPages";
 
 import JobListing from "@/components/JobResults/JobListing.vue";
@@ -43,14 +47,14 @@ export default defineComponent({
   name: "JobListings",
   components: {
     JobListing,
-
     ActionButton,
   },
   setup() {
     const router = useRouter();
     const route = useRoute();
 
-    useFetchJobs();
+    onMounted(useFetchJobs);
+    onMounted(useFetchDegrees);
 
     const goToHome = () => router.push({ name: "Home" });
 
@@ -84,6 +88,14 @@ export default defineComponent({
       const lastPageIndex = pageNumber * 10;
       return filteredJobs.value.slice(firstPageIndex, lastPageIndex);
     });
+
+    const zinx = () => {
+      fetch("/d.json")
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.log(error));
+    };
+    zinx();
 
     return { goToHome, currentPage, nextPage, previousPage, displayedJobs };
   },

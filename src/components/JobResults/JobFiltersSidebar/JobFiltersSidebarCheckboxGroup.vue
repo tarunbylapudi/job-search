@@ -1,21 +1,19 @@
 <template>
-  <accordian :header="header">
-    <fieldset>
-      <ul class="filter">
-        <li v-for="value in uniqueValues" :key="value" class="filter-option">
-          <input
-            :id="value"
-            v-model="selectedValues"
-            :value="value"
-            type="checkbox"
-            style="margin-right: 0.5rem"
-            @change="selectValues"
-          />
-          <label :for="value">{{ value }}</label>
-        </li>
-      </ul>
-    </fieldset>
-  </accordian>
+  <fieldset>
+    <ul class="filter">
+      <li v-for="value in uniqueValues" :key="value" class="filter-option">
+        <input
+          :id="value"
+          v-model="selectedValues"
+          :value="value"
+          type="checkbox"
+          style="margin-right: 0.5rem"
+          @change="selectValues"
+        />
+        <label :for="value">{{ value }}</label>
+      </li>
+    </ul>
+  </fieldset>
 </template>
 
 <script lang="ts">
@@ -24,20 +22,13 @@ import { ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { key } from "@/store";
+import { CLEAR_SELECTED_FILTERS } from "@/store/constants";
 
-import Accordian from "@/components/shared/Accordian.vue";
 export default defineComponent({
   name: "JobFiltersSidebarCheckboxGroup",
-  components: {
-    Accordian,
-  },
   props: {
-    header: {
-      type: String,
-      required: true,
-    },
     uniqueValues: {
-      type: Set as PropType<Set<string>>,
+      type: [Array, Set] as PropType<string[] | Set<string>>,
       required: true,
     },
     mutation: {
@@ -50,6 +41,12 @@ export default defineComponent({
     const router = useRouter();
 
     const selectedValues = ref<string[]>([]);
+
+    store.subscribe((mutation) => {
+      if (mutation.type === CLEAR_SELECTED_FILTERS) {
+        selectedValues.value = [];
+      }
+    });
 
     const selectValues = () => {
       store.commit(props.mutation, selectedValues.value);
