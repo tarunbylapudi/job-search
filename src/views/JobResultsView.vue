@@ -1,9 +1,5 @@
 <template>
-  <!-- <div class="container"><job-filter-sidebar /> <job-listings /></div> -->
-  <div class="grid-container">
-    <div class="sideNav"><job-filter-sidebar /></div>
-    <div class="jobListings"><job-listings /></div>
-  </div>
+  <div class="container"><job-filter-sidebar /> <job-listings /></div>
 </template>
 
 <script lang="ts">
@@ -26,17 +22,5 @@ export default defineComponent({
   flex-direction: row;
   flex-flow: nowrap;
   max-width: 100%;
-}
-.sideNav {
-  grid-area: sideNav;
-}
-.jobListings {
-  grid-area: jobListings;
-}
-.grid-container {
-  display: grid;
-
-  background-color: white;
-  grid-template-areas: "sideNav jobListings jobListings jobListings jobListings";
 }
 </style>

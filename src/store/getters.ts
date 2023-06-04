@@ -1,6 +1,5 @@
 import { GlobalState } from "@/store/types";
-import { Job, Credentials } from "@/api/types";
-import Authentication from "@/utils/Authentication";
+import { Job } from "@/api/types";
 import {
   UNIQUE_ORGANIZATIONS,
   UNIQUE_JOB_TYPES,
@@ -11,8 +10,6 @@ import {
   FILTERED_JOBS,
   IS_LOADING,
   INCLUDE_JOB_BY_SKILL,
-  AUTHENTICATION,
-  LOGIN_LOGOUT_USER,
 } from "@/store/constants";
 
 interface IncludeJobGetters {
@@ -67,10 +64,6 @@ const getters = {
   },
   [IS_LOADING](state: GlobalState) {
     return state.isLoading;
-  },
-  [AUTHENTICATION](state: GlobalState) {
-    const authentication = Authentication(state.authData, state.credentials);
-    return authentication;
   },
 };
 

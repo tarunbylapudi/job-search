@@ -10,7 +10,6 @@ import {
   UNIQUE_ORGANIZATIONS,
   FETCH_JOBS,
   FETCH_DEGREES,
-  FETCH_AUTH_DATA,
   UNIQUE_DEGREES,
 } from "@/store/constants";
 
@@ -46,8 +45,4 @@ export const useFetchJobs = () => {
 export const useFetchDegrees = () => {
   const store = useStore(key);
   return store.dispatch(FETCH_DEGREES);
-};
-export const useFetchAuthData = () => {
-  const store = useStore(key);
-  return store.dispatch(FETCH_AUTH_DATA);
 };

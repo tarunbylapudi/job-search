@@ -15,21 +15,3 @@ export interface Degree {
   id: number;
   degree: string;
 }
-
-export interface AuthData {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-}
-
-export interface Credentials {
-  email: string;
-  password: string;
-}
-
-export interface AuthenticationDetails {
-  Authentication: string;
-  error: string;
-  token: string;
-}

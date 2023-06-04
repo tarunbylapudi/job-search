@@ -11,14 +11,7 @@ const JobView = () =>
 
 const TeamsView = () => import("@/views/TeamsView.vue");
 
-const LoginView = () => import("@/views/LoginView.vue");
-
 const routes = [
-  {
-    path: "/login",
-    name: "Login",
-    component: LoginView,
-  },
   {
     path: "/",
     name: "Home",
