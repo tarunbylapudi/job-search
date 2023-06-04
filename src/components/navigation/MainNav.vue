@@ -24,13 +24,13 @@
           </ul>
         </nav>
         <div class="btn-container">
-          <profile-image v-if="isLoggedIn" data-test="profile-image" />
+          <!-- <profile-image v-if="isLoggedIn" data-test="profile-image" /> -->
           <action-button
-            v-else
+            v-if="isLoggedIn"
             data-test="login-button"
-            text="Sign in"
+            text="Logout"
             type="primary"
-            @click="LOGIN_USER"
+            @click="UserLogout"
           />
         </div>
       </div>
@@ -41,13 +41,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapState, mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 
 import ActionButton from "@/components/shared/ActionButton.vue";
-import ProfileImage from "@/components/navigation/ProfileImage.vue";
+//import ProfileImage from "@/components/navigation/ProfileImage.vue";
 import Subnav from "@/components/navigation/Subnav.vue";
-
-import { LOGIN_USER } from "@/store/constants";
 
 interface HeaderHeight {
   [x: string]: boolean;
@@ -57,7 +55,7 @@ export default defineComponent({
   name: "MainNav",
   components: {
     ActionButton,
-    ProfileImage,
+    // ProfileImage,
     Subnav,
   },
 
@@ -83,19 +81,13 @@ export default defineComponent({
     //   return this.$store.state.isLoggedIn;
     // },
 
-    // ...mapState({ isLoggedIn: (state) => state.isLoggedIn }),
-
-    // ...mapState({ isLoggedIn: "isLoggedIn" }),
-
     ...mapState(["isLoggedIn"]),
   },
   methods: {
     // LOGIN_USER() {
-    //   this.$store.commit(LOGIN_USER);
+    //   this.$store.commit(LOGIN_LOGOUT_USER);
     // },
-
-    ...mapMutations([LOGIN_USER]),
-
+    // ...mapMutations([LOGIN_LOGOUT_USER]),
     // navDisplay() {
     //   let navbar = document.getElementById("nav");
     //   navbar.classList.toggle("show");
@@ -104,6 +96,13 @@ export default defineComponent({
     //   let navbar = document.getElementById("nav");
     //   navbar.classList.remove("show");
     // },
+    ...mapMutations(["LOGIN_LOGOUT_USER"]),
+
+    UserLogout() {
+      this.LOGIN_LOGOUT_USER(false);
+      localStorage.removeItem("token");
+      this.$router.push({ name: "Login" });
+    },
   },
 });
 </script>

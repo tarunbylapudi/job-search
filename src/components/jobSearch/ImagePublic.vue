@@ -3,9 +3,11 @@
     <div class="text-center mt-16 mb-6 text-lg">
       Images from Public-dir and using Feach
     </div>
-    <li v-for="image in images" :key="image.id" class="inline">
-      <slot :url="image.url"></slot>
-    </li>
+    <div class="imgContainer">
+      <li v-for="image in images" :key="image.id">
+        <img :src="image.url" />
+      </li>
+    </div>
   </ul>
 </template>
 <script lang="ts">
@@ -37,3 +39,9 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+.imgContainer {
+  display: inline-block;
+  justify-content: space-between;
+}
+</style>

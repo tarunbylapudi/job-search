@@ -55,13 +55,23 @@ export default defineComponent({
 
 <style scoped>
 .container {
+  position: fixed;
   display: flex;
   flex-direction: column;
   background-color: white;
   padding: 2rem 1rem;
+  margin-bottom: 5rem;
   width: 21rem;
   height: 100%;
-  position: fixed;
   border-right: 1px solid #dadce0;
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgb(214, 213, 213);
 }
 </style>
